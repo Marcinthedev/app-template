@@ -1,0 +1,42 @@
+{
+  "extraKnownMarketplaces": {
+    "mattpocock": {
+      "source": { "source": "github", "repo": "mattpocock/skills" }
+    }
+  },
+  "enabledPlugins": {
+    "mattpocock-skills@mattpocock": true
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(npx playwright *)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(gh pr *)",
+      "Bash(gh issue *)",
+      "Bash(gh run *)"
+    ],
+    "deny": [
+      "Bash(git push origin main*)",
+      "Bash(git push * main)",
+      "Bash(git tag *)",
+      "Bash(gh release *)",
+      "Bash(gh workflow run *)",
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          { "type": "command", "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/after-edit.sh\"" }
+        ]
+      }
+    ]
+  }
+}
